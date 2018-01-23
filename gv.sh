@@ -1,4 +1,5 @@
-contains() {
+contains()
+{
     string="$1"
     substring="$2"
     if test "${string#*$substring}" != "$string"
