@@ -41,6 +41,6 @@ for (( i=1; i>0; i++ ))
         else
         echo "第 $i 次尝试 "`date`;
 	fi
-    sleep 1s;
+    sleep 0.5s;
 done
 
