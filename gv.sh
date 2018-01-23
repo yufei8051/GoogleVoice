@@ -9,17 +9,6 @@ keyerrorlogo='
 
 clear
 echo "$keyerrorlogo";
-#!/bin/bash
-keyerrorlogo='
-==================================================================
-
-           --------- Google Voice申请脚本 ----------
-		   		   
-                                                 -----  jialezi 
-==================================================================';
-
-clear
-echo "$keyerrorlogo";
 echo "请确保填写的信息准确，填错了脚本不会有任何提示。";
 echo "按Enter继续";
 read
@@ -54,4 +43,3 @@ for (( i=1; i>0; i++ ))
 	fi
     sleep 0.5s;
 done
-
