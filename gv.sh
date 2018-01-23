@@ -15,3 +15,5 @@ while true; do
     contains "$result" "error" || exit 0
     sleep 1
 done
+
+
