@@ -1,17 +1,46 @@
-contains() {
-    string="$1"
-    substring="$2"
-    if test "${string#*$substring}" != "$string"
-    then
-        return 0    # $substring is in $string
-    else
-        return 1    # $substring is not in $string
-    fi
-}
+#!/bin/bash
+keyerrorlogo='
+==================================================================
 
-while true; do
-    result=$(curl 'https://www.google.com/voice/b/0/service/post' -H 'origin: https://www.google.com' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: zh-CN,zh;q=0.9' -H 'user-agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36' -H 'content-type: application/x-www-form-urlencoded;charset=UTF-8' -H 'accept: */*' -H 'referer: https://www.google.com/voice/b/0' -H 'authority: www.google.com' -H 'cookie: gv=qgWUvn6XQ2SQuu8JqKFMwAk9499s_TdeduABbGX9jEkQWw2yACJwo5evVsXOUzRImNRwDw.; GV_NR=1; SID=qgWUvmyM-6b8neTWhXHJ6WlMxDsYElGWazyX3WyOeuY0LinLfKoZBLkpmtedBCao9aBG1g.; HSID=A26_uB1jje_Pfb_hE; SSID=AKHOy2l0brmQ7KZ6p; APISID=qUJBwjgv6swr1Q0J/AREG6dbGJ5tAHa9b6; SAPISID=2KWHoroeHK3IS13E/AVEOSFV80eBo_tSYy; _ga=GA1.1.1712470895.1516368201; _gid=GA1.1.1055719436.1516368201; OTZ=4235548_24_24__24_; NID=122=hevR2CnOLLoUrQQom8niYLX9W07YY_JCm3dl-ji0X3eIzAG5FiSfp7ovwZ3EVLzQRbCG4Nc8WI8R6tQmnY1fO5J3liHHYqObjOP0H5tBT_zPJvb0uL2DEPuyJfYDikniyBNed_wVM4oW1KwQGUzrvJiXhX-XM86m4rts3cBGG5zTrJCJNYoRlTYpOG-cM4Pu1xNBa8f9bSrb0s71P11G6eCf4ujpIGLXW5-sImIPDWYXOaQPLu7CcqU; 1P_JAR=2018-1-23-9; S=grandcentral=_m8qvkkeO4UoW_-dosPUb-_2rGc54V97:billing-ui-v3=bLp4X-6tpfxpOvDqCHE5bN356ymMGGb4:billing-ui-v3-efe=bLp4X-6tpfxpOvDqCHE5bN356ymMGGb4; _gat=1; SIDCC=AAiTGe8-CDc4B2q7Y43BinaGGHGScGj2hmOdIsoVR33j0XC0pS8GGAHwK_dFuiaC8elD4ak6WQ' -H 'x-client-data: CJW2yQEIo7bJAQjBtskBCPqcygEIqZ3KAQioo8oB' --data 'sid=3&mid=2&req=%5Bnull%2Ctrue%5D&_rnr_se=3m7rbLYdtrBAe4UdPZ7FRNhj9uE%3D' --compressed)
-    contains "$result" "error" || exit 0
-    sleep 1
+           --------- Google Voice申请脚本 ----------
+		   		   
+                                                 -----  jialezi 
+==================================================================';
+
+clear
+echo "$keyerrorlogo";
+echo "请确保填写的信息准确，填错了脚本不会有任何提示。";
+echo "按Enter继续";
+read
+
+echo "请输入你的cURL(bash)"
+read curl
+
+echo "请输入你要申请的GV号（纯数字10位，如：3859998880）"
+read gv
+
+echo $curl > gv.txt
+
+sed -i 's/mid=2/mid=6/' gv.txt
+sed -i 's/true%5D/%22%2B1'$gv'%22%2Ctrue%2C%22%22%5D/' gv.txt
+
+echo "按Enter开始刷号";
+read
+
+
+
+for (( i=1; i>0; i++ ))
+    do
+	a=`bash gv.txt`;
+        b='[[null,null,"There was an error with your request. Please try again."]]';
+	if [[ "$a" != "$b" ]];
+        then
+        echo "执行失败/申请成功";
+        echo "共执行 $i 次";
+        exit 0;
+        else
+        echo "第 $i 次尝试 "`date`;
+	fi
+    sleep 1s;
 done
 
