@@ -2,7 +2,7 @@
 #请注意使用UTF-8 without BOM格式，否则可能会出错
 #脚本 by Sunbread
 ########## Setting ##########
-threads=4 # 根据自身情况调整，若不会调整则按默认值即可
+threads=16 # 根据自身情况调整，若不会调整则按默认值即可
 ########## Code ##########
 echo 伪多线程脚本 by Sunbread
 for((i=0;i<$threads;++i));do while :;do
